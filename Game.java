@@ -114,6 +114,10 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+                
+            case LOOK:
+                lookAt();
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -164,6 +168,11 @@ public class Game
         }
     }
 
+    private void lookAt()
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
