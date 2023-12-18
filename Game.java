@@ -34,28 +34,73 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, cafeteria, library,
+        planetarium, gym, gallery, store, lounge, support, health, 
+        classroom;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
+        pub = new Room("in the art gallery");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        cafeteria = new Room("in the cafeteria");
+        library = new Room("in the library");
+        planetarium = new Room("in planetarium");
+        gym = new Room("in the gym");
+        gallery  = new Room("in the art gallery");
+        store = new Room("in the store");
+        lounge = new Room("in the student lounge");
+        support = new Room("in the student support office");
+        health = new Room("in the health office");
+        classroom = new Room("in a classroom");
         
         // initialise room exits
+        outside.setExit("north", lounge);
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        
+        lounge.setExit("south", outside);
 
         theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
+        
         lab.setExit("north", outside);
         lab.setExit("east", office);
-
+        lab.setExit("west", classroom);
+        lab.setExit("south", health);
+        
         office.setExit("west", lab);
+        
+        classroom.setExit("north", lab);
+        classroom.setExit("east", gym);
+        classroom.setExit("south", support);
+        
+        gym.setExit("west", classroom);
+        
+        support.setExit("north", classroom);
+        
+        health.setExit("north", lab);
+         
+        pub.setExit("north", cafeteria);
+        pub.setExit("east", outside);
+        pub.setExit("south", planetarium);
+        pub.setExit("west", lounge);
+        
+        cafeteria.setExit("south",pub);
+        
+        planetarium.setExit("north",pub);
+        
+        lounge.setExit("north",library);
+        lounge.setExit("east",pub);
+        lounge.setExit("south",gallery);
+        lounge.setExit("west",store);
+        
+        library.setExit("south",lounge);
+        
+        gallery.setExit("north",lounge);
+        
+        store.setExit("east",lounge);
 
         currentRoom = outside;  // start game outside
     }
@@ -118,6 +163,10 @@ public class Game
             case LOOK:
                 lookAt();
                 break;
+                
+            case EAT:
+                eatHere();
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -170,6 +219,13 @@ public class Game
 
     private void lookAt()
     {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
+    private void eatHere()
+    {
+        System.out.println
+        ("You have eaten now and you are not hungry any more.");
         System.out.println(currentRoom.getLongDescription());
     }
     
